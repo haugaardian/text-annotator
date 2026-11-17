@@ -11,25 +11,27 @@ const result = getAnnotatedText(`
 Project update
 
 Here are the deliverables:
-- See report.pdf for details
-- Check https://example.com for the latest build
-- The config lives at /etc/app/config.json
+1. See report.pdf for details
+2. Check https://example.com for the latest build
+3. The config lives at /etc/app/config.txt
 `);
 
 for (const segment of result.segments) {
-  console.log(segment.type, segment.text);
+  const text = result.srcText.substring(segment.interval.start, segment.interval.end);
+  console.log(segment.type, text);
 }
 ```
 
 Example output:
 
 ```
-Set { 'header' }   "Project update"
-Set { 'listItem' } "See report.pdf for details"
-Set { 'listItem' } "Check https://example.com for the latest build"
-Set { 'url' }      "https://example.com"
-Set { 'listItem' } "The config lives at /etc/app/config.json"
-Set { 'path' }     "/etc/app/config.json"
+Set { 'header' }              Project update
+Set { 'header', 'listLeadIn' } Here are the deliverables:
+Set { 'listItem' }             1. See report.pdf for details
+Set { 'listItem' }             2. Check https://example.com for the latest build
+Set { 'url' }                  https://example.com
+Set { 'listItem' }             3. The config lives at /etc/app/config.txt
+Set { 'path' }                 /etc/app/config.txt
 ```
 
 Segments can have multiple types (e.g. a list item that also contains a URL). Overlapping segments are preserved so you can layer annotations.
