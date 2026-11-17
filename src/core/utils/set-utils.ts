@@ -1,11 +1,11 @@
 export const setsAreEqual = <T>(a: Set<T>, b: Set<T>): boolean => {
-    if (a.size !== b.size) {
-        return false;
+  if (a.size !== b.size) {
+    return false;
+  }
+  for (const value of a) {
+    if (!b.has(value)) {
+      return false;
     }
-    for (const value of a) {
-        if (!b.has(value)) {
-            return false;
-        }
-    }
-    return true;
+  }
+  return true;
 };
