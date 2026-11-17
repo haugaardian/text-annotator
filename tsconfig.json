@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "lib": [
+            "ES2020"
+        ],
+        "allowImportingTsExtensions": true,
+        "outDir": "./dist",
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "types": ["jest", "jest-extended", "node"],
+        "baseUrl": ".",
+        "paths": {
+            "@core/*": [
+                "src/core/*"
+            ]
+        }
+    },
+    "include": [
+        "src",
+        "src/node-dependent/**/*",
+        "src/core/**/*"
+    ]
+}
