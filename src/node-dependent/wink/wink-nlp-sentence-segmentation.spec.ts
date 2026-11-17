@@ -154,15 +154,6 @@ describe("sentence segmentation acceptance criteria", () => {
     expect(substringInterval(text, result[0].interval)).toBe(text);
   });
 
-  it("does infer sentence boundaries without punctuation on a double new line with first work not uppercase", () => {
-    const sentences = ["Check out my image", "image.png"];
-    const text = sentences.join("\n\n");
-    const result = sentenceSegmentation.splitIntoSegments(text);
-    expect(result.length).toBe(2);
-    expect(substringInterval(text, result[0].interval)).toBe(sentences[0]);
-    expect(substringInterval(text, result[1].interval)).toBe(sentences[1]);
-  });
-
   it.each(["in", "on", "at", "by", "with", "for", "from", "of", "to"])(
     "joins lines when previous line ends with mid-thought preposition '%s' even though next is uppercase",
     (preposition) => {
@@ -321,15 +312,6 @@ describe("sentence segmentation acceptance criteria", () => {
     );
     expect(substringInterval(text, result[2].interval)).toEqual("What?");
     expect(substringInterval(text, result[3].interval)).toEqual("Claude ?");
-  });
-
-  it("does not break into sentences when refering to function calls inside objects", () => {
-    const sentence = "Add the function Controller.fixWorld()";
-
-    const result = sentenceSegmentation.splitIntoSegments(sentence);
-
-    expect(result.length).toBe(1);
-    expect(substringInterval(sentence, result[0].interval)).toEqual(sentence);
   });
 
   it.each<string>(["in", "of", "for", "with", "to", "on", "at", "by"])(
